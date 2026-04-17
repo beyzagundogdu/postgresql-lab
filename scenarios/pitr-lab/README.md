@@ -101,7 +101,7 @@ INSERT INTO operations (description) VALUES
 ```
 ### Base Backup Al
 
-````bash
+```bash
 docker exec -it pg14-pitr bash
 
 PGUSER=beyza PGPASSWORD=password \
