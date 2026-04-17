@@ -72,7 +72,7 @@ pitr-lab/
 
 ### PostgreSQL'i Baslat
 
-````bash
+```bash
 docker compose up -d 
 ```
 
