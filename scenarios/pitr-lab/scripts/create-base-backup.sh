@@ -16,6 +16,4 @@ echo "Base backup completed successfully."
 echo "Backup location inside container: ${BACKUP_DIR}"
 echo "Backup location on host: ./backups/base_1"
 
-# Çalıştırma:
-
-./scripts/create-base-backup.sh   
+# Çalıştırma: ./scripts/create-base-backup.sh   
