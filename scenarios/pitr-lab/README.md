@@ -109,6 +109,7 @@ pg_basebackup -h localhost -D /backups/base_1 -F plain -X fetch -P
 ```
 
 Bu adımda:
+
 . Veritabanının fiziksel kopyası alındı
 
 . Gerekli WAL segmentleri de dahil edildi
@@ -165,6 +166,7 @@ docker compose up -d
 ```
 
 PostgreSQL:
+
 . Recovery modunda baslar
 
 . WAL replay yapar
@@ -187,6 +189,7 @@ SELECT * FROM operations;
 
 
 Öğrendiklerim
+
 . WAL, veritabanında zaman içinde geri gidebilmemizi sağlar
 
 . Base backup tek başına yeterli değildir
@@ -198,3 +201,30 @@ SELECT * FROM operations;
 . pg_switch_wal test senaryolarında kritiktir
 
 . Docker volume veri kalıcılığı için gereklidir
+
+
+- Scriptleri çalıştırılabilir yapmak için:
+```bash
+chmod +x scenarios/pitr-lab/scripts/*.sh
+```
+
+
+- Sonra PITR lab klasöründeyken örnek akış şöyle olur:
+```bash
+cd scenarios/pitr-lab
+
+docker compose up -d
+
+docker exec -i pg14-pitr psql -U beyza -d testdb < scripts/init.sql
+
+./scripts/create-base-backup.sh
+
+docker exec -i pg14-pitr psql -U beyza -d testdb < scripts/simulate-disaster.sql
+
+./scripts/restore.sh
+```
+
+- Sonra docker-compose.yml içine recovery ayarlarını ekleyip:
+```bash
+docker compose up -d
+```
